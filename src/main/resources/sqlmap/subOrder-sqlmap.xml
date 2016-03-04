@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.meitun.salesorder.domain.SubOrderMapper">
+
+	<resultMap type="com.meitun.salesorder.domain.SubOrderDO" id="SubOrderDOResultMap">
+		<id column="id" property="id" />
+		<result column="code" property="code" />
+		<result column="order_id" property="orderId" />
+		<result column="order_code" property="orderCode" />
+		<result column="status" property="status" />
+		<result column="type" property="type" />
+		<result column="quantity" property="quantity" />
+		<result column="total" property="total" />
+		<result column="original_total" property="originalTotal" />
+		<result column="discount" property="discount" />
+		<result column="freight" property="freight" />
+		<result column="balance" property="balance" />
+		<result column="points" property="points" />
+		<result column="supplier_id" property="supplierId" />
+		<result column="supplier_name" property="supplierName" />
+		<result column="supplier_alias" property="supplierAlias" />
+		<result column="warehouse_id" property="warehouseId" />
+		<result column="warehouse_name" property="warehouseName" />
+		<result column="member_id" property="memberId" />
+		<result column="consignee_name" property="consigneeName" />
+		<result column="consignee_mobile" property="consigneeMobile" />
+		<result column="deleted" property="deleted" />
+		<result column="put_status" property="putStatus" />
+		<result column="delivered_time" property="deliveredTime" />
+		<result column="done_time" property="doneTime" />
+		<result column="account_name" property="accountName" />
+		<result column="remark" property="remark" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+
+		<result column="tax_fee" property="taxFee" />
+		<result column="pay_type" property="payType" />
+		<result column="order_type" property="orderType" />
+		<result column="pay_way" property="payWay" />
+		<result column="pay_time" property="payTime" />
+		<result column="pay_code" property="payCode" />
+		<result column="pay_company_code" property="payCompanyCode" />
+		<result column="sea_channel" property="seaChannel" />
+		<result column="sea_channel_name" property="seaChannelName" />
+		<result column="custom_code" property="customCode" />
+		<result column="org_name" property="orgName" />
+		<result column="source" property="source" />
+		
+		<result column="track_source" property="trackSource" />
+		<result column="pub_version" property="pubVersion" />
+
+		<result column="jm_status" property="jmStatus" />
+		<result column="jm_errormsg" property="jmErrorMsg" />
+		<result column="approve_status" property="approveStatus" />
+	</resultMap>
+
+	<sql id="MybatisSubOrderDAO_all_column_fields">
+		id,code,order_id,order_code,status,type,quantity,total,original_total,discount,freight,balance,points,supplier_id,supplier_name,supplier_alias,warehouse_id,warehouse_name,member_id,consignee_name,consignee_mobile,deleted,account_name,delivered_time,done_time,create_time,modify_time,
+		tax_fee,pay_type,order_type,pay_way,pay_time,pay_code,pay_company_code,sea_channel,custom_code,org_name,put_status,sea_channel_name,source,track_source,pub_version,jm_status,jm_errormsg,approve_status
+	</sql>
+
+	<sql id="MybatisSubOrderDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[ ]]> 标签 -->
+		<where>
+			<if test="code != null  and code != '' "> AND code=#{code} </if>
+			<if test="orderId != null "> AND order_id=#{orderId} </if>
+			<if test="orderCode !=null and orderCode !='' "> AND order_code=#{orderCode}</if>
+			<if test="memberId != null  "> AND member_id=#{memberId} </if>
+			<if test="supplierId != null   "> AND supplier_id=#{supplierId} </if>
+			<if test="warehouseId != null  "> AND warehouse_id=#{warehouseId} </if>
+			<if test="status != null  "> AND status=#{status} </if>
+			<if test="type != null  "> AND type=#{type} </if>
+			<if test="quantity != null  "> AND quantity=#{quantity} </if>
+			<if test="total != null  "> AND total=#{total} </if>
+			<if test="originalTotal != null "> AND original_total=#{originalTotal} </if>
+			<if test="freight != null  "> AND freight=#{freight} </if>
+			<if test="balance != null "> AND balance=#{balance} </if>
+			<if test="points != null   "> AND points=#{points} </if>
+			<if test="supplierName != null  and supplierName != '' "> AND supplier_name=#{supplierName} </if>
+			<if test="consigneeMobile != null  and consigneeMobile != '' "> AND consignee_mobile=#{consigneeMobile} </if>
+			<if test="deleted != null "> AND deleted=#{deleted} </if>
+			<if test="putStatus != null "> AND put_status=#{putStatus} </if>
+
+			<if test="taxFee != null "> AND tax_fee=#{taxFee} </if>
+			<if test="payCode != null and payCode != ''"> AND pay_code=#{payCode} </if>
+			<if test="seaChannel != null "> AND sea_channel=#{seaChannel} </if>
+			<if test="payType != null "> AND pay_type=#{payType} </if>
+			<if test="orderType != null "> AND order_type=#{orderType} </if>
+			<if test="payWay != null "> AND pay_way=#{payWay} </if>
+			<if test="payTime != null "> AND pay_time=#{payTime} </if>
+			<if test="customCode != null and customCode != ''"> AND custom_code=#{customCode} </if>
+			<if test="orgName != null and orgName != ''"> AND org_name=#{orgName} </if>
+			<if test="jmStatus != null and jmStatus != ''"> AND jm_status=#{jmStatus} </if>
+			<if test="approveStatus != null and approveStatus != ''"> AND approve_status=#{approveStatus} </if>
+			<if test="trackSource != null and trackSource != ''"> AND track_source=#{trackSource} </if>
+			<if test="pubVersion != null and pubVersion != ''"> AND pub_version=#{pubVersion} </if>
+
+		</where>
+	</sql>
+
+	<select id="MybatisSubOrderDAO_selectById" parameterType="long"
+		resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		id = #{id}
+	</select>
+
+	<insert id="MybatisSubOrderDAO_insert" parameterType="com.meitun.salesorder.domain.SubOrderDO"
+		useGeneratedKeys="true">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO so_sub_order(
+		id,
+		code,
+		order_id,
+		order_code,
+		status,
+		type,
+		quantity,
+		total,
+		original_total,
+		discount,
+		freight,
+		balance,
+		points,
+		supplier_id,
+		supplier_name,
+		supplier_alias,
+		warehouse_id,
+		member_id,
+		deleted,
+		done_time,
+		consignee_name,
+		consignee_mobile,
+		account_name,
+		remark,
+		create_time,
+		modify_time,
+		tax_fee,
+		pay_type,
+		order_type,
+		pay_way,
+		pay_time,
+		pay_code,
+		pay_company_code,
+		sea_channel,
+		custom_code,
+		org_name,
+		sea_channel_name,
+		source,
+		track_source,
+		pub_version
+		)values(
+		#{id},
+		#{code},
+		#{orderId},
+		#{orderCode},
+		#{status},
+		#{type},
+		#{quantity},
+		#{total},
+		#{originalTotal},
+		#{discount},
+		#{freight},
+		#{balance},
+		#{points},
+		#{supplierId},
+		#{supplierName},
+		#{supplierAlias},
+		#{warehouseId},
+		#{memberId},
+		#{deleted},
+		#{doneTime},
+		#{consigneeName},
+		#{consigneeMobile},
+		#{accountName},
+		#{remark},
+		#{createTime},
+		#{modifyTime},
+		#{taxFee},
+		#{payType},
+		#{orderType},
+		#{payWay},
+		#{payTime},
+		#{payCode},
+		#{payCompanyCode},
+		#{seaChannel},
+		#{customCode},
+		#{orgName},
+		#{seaChannelName},
+		#{source},
+		#{trackSource},
+		#{pubVersion}
+		)
+	</insert>
+
+	<update id="MybatisSubOrderDAO_updateById" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		UPDATE
+		so_sub_order
+		SET
+		code = #{code},
+		order_id = #{orderId},
+		status =
+		#{status},
+		type = #{type},
+		quantity = #{quantity},
+		total = #{total},
+		original_total = #{originalTotal},
+		freight = #{freight},
+		balance =
+		#{balance},
+		points = #{points},
+		supplier_id = #{supplierId},
+		supplier_name = #{supplierName},
+		warehouse_id = #{warehouseId},
+		delivered_time = #{deliveredTime},
+		done_time = #{doneTime},
+		modify_time
+		= #{modifyTime},
+		put_status = #{putStatus}
+		WHERE
+		id = #{id}
+	</update>
+
+	<update id="MybatisSubOrderDAO_updateSubOrderStatus"
+		parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		update so_sub_order
+		<set>
+			<if test="status != null  ">status=#{status},</if>
+			<if test="deliveredTime != null ">delivered_time = #{deliveredTime},</if>
+			<if test="doneTime != null">done_time=#{doneTime},</if>
+			<if test="modifyTime != null">modify_time=#{modifyTime},</if>
+			<if test="payTime != null  and payTime != '' ">pay_time=#{payTime},</if>
+			<if test="payCode != null  and payCode != '' ">pay_code=#{payCode},</if>
+			<if test="putStatus !=null">put_status = #{putStatus},</if>
+			<if test="jmStatus != null">jm_status=#{jmStatus}, </if>
+			<if test="payType !=null">pay_type = #{payType},</if>
+			<if test="payWay !=null">pay_way = #{payWay},</if>
+			<if test="approveStatus !=null">approve_status = #{approveStatus},</if>
+		</set>
+		<where>
+			<if test="id != null  and id != '' ">and id=#{id}</if>
+			<if test="code != null  and code != '' ">and code=#{code}</if>
+			<if test="orderCode != null  and orderCode != '' ">and order_code=#{orderCode}</if>
+			<if test="orderId != null  and orderId != '' ">and order_id=#{orderId}</if>
+		</where>
+	</update>
+
+	<update id="deleteByOrderId" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		UPDATE so_sub_order
+		SET
+		deleted = #{deleted},
+		modify_time = now()
+		WHERE
+		order_id=#{orderId}
+	</update>
+
+	<update id="deleteByCode" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		UPDATE so_sub_order
+		SET
+		deleted = #{deleted},
+		modify_time = now()
+		WHERE
+		code=#{code}
+		AND
+		member_id=#{memberId}
+	</update>
+
+	<delete id="MybatisSubOrderDAO_deleteById" parameterType="long">
+		DELETE
+		FROM so_sub_order WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSubOrderDAO_update_dynamic" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		UPDATE so_sub_order
+		<set>
+			<if test="code != null  and code != '' ">code=#{code},</if>
+			<if test="orderId != null  ">order_id=#{orderId},</if>
+			<if test="status != null  ">status=#{status},</if>
+			<if test="type != null  ">type=#{type},</if>
+			<if test="quantity != null ">quantity=#{quantity},</if>
+			<if test="total != null  ">total=#{total},</if>
+			<if test="originalTotal != null  ">original_total=#{originalTotal},</if>
+			<if test="freight != null  ">freight=#{freight},</if>
+			<if test="balance != null  ">balance=#{balance},</if>
+			<if test="points != null  ">points=#{points},</if>
+			<if test="supplierId != null  ">supplier_id=#{supplierId},</if>
+			<if test="supplierName != null  and supplierName != '' ">supplier_name=#{supplierName},</if>
+			<if test="warehouseId != null  ">warehouse_id=#{warehouseId},</if>
+			<if test="putStatus != null  ">put_status=#{putStatus},</if>
+			<if test="doneTime != null  and doneTime != '' ">done_time=#{doneTime},</if>
+			<if test="modifyTime != null  and modifyTime != '' ">modify_time=#{modifyTime},</if>
+			<if test="jmStatus != null and jmStatus !='' ">jm_status=#{jmStatus},</if>
+			<if test="jmErrorMsg != null and jmErrorMsg !='' ">jm_errormsg=#{jmErrorMsg},</if>
+			<if test="approveStatus != null and approveStatus !='' ">approve_status=#{approveStatus},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<select id="MybatisSubOrderDAO_select_dynamic" resultMap="SubOrderDOResultMap"
+		parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		<include refid="MybatisSubOrderDAO_dynamic_where_fields" />
+		limit 1000
+	</select>
+
+	<select id="MybatisSubOrderDAO_select_dynamic_count" resultType="long"
+		parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		SELECT
+		count(1)
+		FROM
+		so_sub_order
+		<include refid="MybatisSubOrderDAO_dynamic_where_fields" />
+	</select>
+
+	<select id="MybatisSubOrderDAO_select_dynamic_count_for_finance" resultType="long" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		SELECT
+		count(1)
+		FROM
+		so_sub_order
+		<include refid="MybatisSubOrderDAO_dynamic_where_fields" />
+		AND create_time >= date_sub(CURDATE() , INTERVAL 1 MONTH)
+	</select>
+
+	<select id="MybatisSubOrderDAO_select_dynamic_page_query"
+		resultMap="SubOrderDOResultMap" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		<include refid="MybatisSubOrderDAO_dynamic_where_fields" />
+		ORDER BY create_time DESC
+		Limit #{start},#{pageSize}
+	</select>
+
+	<select id="MybatisSubOrderDAO_select_dynamic_page_query_for_finance"
+		resultMap="SubOrderDOResultMap" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		<include refid="MybatisSubOrderDAO_dynamic_where_fields" />
+		AND create_time >= date_sub(CURDATE() , INTERVAL 1 MONTH)
+		Limit
+		#{start},#{pageSize}
+	</select>
+
+	<!-- ***************************************************************************************************************** -->
+
+	<!-- subOrderQO where条件 -->
+	<sql id="SubOrderQO_Where"><!-- xml转义字符需要 <![CDATA[ ]]> 标签 -->
+		<where>
+			<if test="orderId != null "> AND order_id=#{orderId} </if>
+			<if test="orderCode != null and orderCode != '' "> AND order_code=#{orderCode} </if>
+			<if test="memberId != null  "> AND member_id=#{memberId} </if>
+			<if test="code != null  and code != '' "> AND code = #{code} </if>
+			<if test="supplierId != null   "> AND supplier_id=#{supplierId} </if>
+			<if test="warehouseId != null  "> AND warehouse_id=#{warehouseId} </if>
+			<if test="status != null  "> AND status=#{status} </if>
+			<if test="type != null  "> AND type=#{type} </if>
+			<if test="accountName != null and accountName != '' "> AND account_name=#{accountName} </if>
+			<if test="source != null"> AND source = #{source} </if>
+			<if test="taxFee != null "> AND tax_fee=#{taxFee} </if>
+			<if test="payCode != null and payCode != ''"> AND pay_code=#{payCode} </if>
+			<if test="seaChannel != null "> AND sea_channel=#{seaChannel} </if>
+			<if test="payType != null "> AND pay_type=#{payType} </if>
+			<if test="orderType != null "> AND order_type=#{orderType} </if>
+			<if test="payWay != null "> AND pay_way=#{payWay} </if>
+			<if test="quantity != null  "> AND quantity=#{quantity} </if>
+			<if test="total != null  "> AND total=#{total} </if>
+			<if test="originalTotal != null "> AND original_total=#{originalTotal} </if>
+			<if test="freight != null  "> AND freight=#{freight} </if>
+			<if test="balance != null "> AND balance=#{balance} </if>
+			<if test="points != null   "> AND points=#{points} </if>
+			<if test="warehouseId != null and warehouseName != '' "> AND warehouse_name=#{warehouseName} </if>
+			<if test="deleted != null "> AND deleted=#{deleted} </if>
+			<if test="putStatus!= null "> AND put_status=#{putStatus} </if>
+			<if test="approveStatus != null and approveStatus != ''"> AND approve_status=#{approveStatus} </if>
+			<!-- 非原生条件 -->
+			<if test="startTime != null  and startTime != '' "> AND create_time&gt;=#{startTime} </if>
+			<if test="endTime != null  and endTime != '' "> AND create_time&lt;=#{endTime} </if>
+			<!-- <if test="payTime != null "> AND pay_time=#{payTime} </if> -->
+			<if test="consigneeName != null  and consigneeName != '' "> AND consignee_name LIKE CONCAT(#{consigneeName},'%')
+			</if>
+			<if test="consigneeMobile != null  and consigneeMobile != '' "> AND consignee_mobile=#{consigneeMobile} </if>
+			<if test="supplierName != null  and supplierName != '' "> AND supplier_name=#{supplierName} </if>
+			<if test="statusList != null ">
+				AND status IN
+				<foreach item="sts" collection="statusList" separator=","
+					open="(" close=")">
+					#{sts}
+				</foreach>
+			</if>
+			<if test="orderIdList != null and orderIdList.size !=0">
+				AND order_id IN
+				<foreach item="oid" collection="orderIdList" separator=","
+					open="(" close=")">
+					#{oid}
+				</foreach>
+			</if>
+			<if test="typeList != null and typeList.size != 0">
+				AND type IN
+				<foreach item="type" collection="typeList" separator=","
+					open="(" close=")">
+					#{type}
+				</foreach>
+			</if>
+			<if test="orderTypeList != null and orderTypeList.size != 0">
+				AND order_type IN
+				<foreach item="orderType" collection="orderTypeList" separator=","
+					open="(" close=")">
+					#{orderType}
+				</foreach>
+			</if>
+			<if test="supplierIdList != null and supplierIdList.size != 0">
+				AND supplier_id IN
+				<foreach item="sid" collection="supplierIdList" separator=","
+					open="(" close=")">
+					#{sid}
+				</foreach>
+			</if>
+			<if test="deliverBeginTime != null  and deliverBeginTime != '' "> AND delivered_time&gt;=#{deliverBeginTime} </if>
+			<if test="deliverEndTime != null  and deliverEndTime != '' "> AND delivered_time&lt;=#{deliverEndTime} </if>
+			<if test="doneBeginTime != null  and doneBeginTime != '' "> AND (done_time&gt;=#{doneBeginTime} OR done_time IS
+				NULL)
+			</if>
+			<if test="doneEndTime != null  and doneEndTime != '' "> AND done_time&lt;=#{doneEndTime}</if>
+
+			<if test="hasPayCode != null and hasPayCode == 1"> AND pay_code IS NOT NULL </if>
+			<if test="hasPayCode != null and hasPayCode == 0"> AND pay_code IS NULL </if>
+			<if test="beginPayTime != null ">
+				AND pay_time&lt;= #{beginPayTime}
+			</if>
+			<if test="orderPrice != null and mark == 1">
+				and (
+				total > 0  or status!=4 or approve_status = 1 or sea_channel is not null
+				or (a.total=0 and exists(
+				   select 1
+				   from so_sub_order b
+				   where b.member_id = a.member_id
+				         and b.pay_code is not null
+				         and DATE_FORMAT(b.create_time,'%Y-%m-%d') = DATE_FORMAT(a.create_time,'%Y-%m-%d')
+				         and b.total>0
+				    )
+					)
+				)
+			</if>
+			
+			<if test="mark == 1 and isExport == 1">
+				and (((type=4 or type=5) and approve_status=1) or (type!=4 and type!=5))
+			</if>
+			
+			<if test="orderPrice != null and mark == 2 ">
+				and (
+				total = #{orderPrice} 
+				AND 
+				not exists(
+				   select 1
+				   from so_sub_order b
+				   where b.member_id = a.member_id
+				         and b.pay_code is not null
+				         and DATE_FORMAT(b.create_time,'%Y-%m-%d') = DATE_FORMAT(a.create_time,'%Y-%m-%d') 
+				         and b.total>0
+				)
+				and sea_channel is null and status = 4 and approve_status = 0
+				)
+			</if>
+		</where>
+	</sql>
+
+	<!-- 根据subOrderQO分页查询 -->
+	<select id="selectPageByQO" resultMap="SubOrderDOResultMap"
+		parameterType="com.meitun.salesorder.dto.remote.SubOrderQO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order a
+		<include refid="SubOrderQO_Where" />
+		ORDER BY a.create_time DESC
+		Limit #{start},#{pageSize}
+	</select>
+
+	<!-- 根据subOrderQO查询总记录数 -->
+	<select id="selectCountByQO" resultType="long"
+		parameterType="com.meitun.salesorder.dto.remote.SubOrderQO">
+		SELECT
+		count(1)
+		FROM
+		so_sub_order a
+		<include refid="SubOrderQO_Where" />
+	</select>
+	
+	<select id="selectAuditOrder" resultMap="SubOrderDOResultMap" parameterType="com.meitun.salesorder.dto.remote.SubOrderQO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order a
+		<include refid="SubOrderQO_Where" />
+		ORDER BY a.create_time ASC
+		LIMIT 10000
+	</select>
+
+	<!-- 根据code查询 -->
+	<select id="selectOneByCode" parameterType="String" resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		code = #{code}
+		limit 0,1
+	</select>
+
+	<!-- 根据父订单ID批量查询 -->
+	<select id="selectListByOrderIdList" resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		order_id IN
+		<foreach item="oid" collection="list" separator="," open="("
+			close=")">
+			#{oid}
+		</foreach>
+		ORDER BY create_time DESC
+	</select>
+	
+	<select id="selectListByOrderCodeList" resultMap="SubOrderDOResultMap">
+	    SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		order_code IN
+		<foreach item="oid" collection="list" separator="," open="("
+			close=")">
+			#{oid}
+		</foreach>
+		ORDER BY create_time DESC
+	</select>
+
+	<!-- 根据ID批量查询 -->
+	<select id="selectListByIdList" parameterType="list"
+		resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		id IN
+		<foreach item="oid" collection="list" separator="," open="("
+			close=")">
+			#{oid}
+		</foreach>
+		ORDER BY create_time DESC
+	</select>
+
+	<!-- 根据父订单号删除 -->
+	<update id="deleteByOrderCode" parameterType="com.meitun.salesorder.domain.SubOrderDO">
+		UPDATE so_sub_order
+		SET deleted = #{deleted},
+		modify_time = now()
+		WHERE order_code =
+		#{orderCode}
+		AND member_id = #{memberId}
+	</update>
+
+	<!-- 根据子订单code列表查询 -->
+	<select id="selectListByCodeList" parameterType="list"
+		resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		code in
+		<foreach item="code" collection="list" separator="," open="("
+			close=")">
+			#{code}
+		</foreach>
+		ORDER BY create_time DESC
+	</select>
+
+	<select id="queryOrderCodeBySubOrderCodeAndCancelStatus"
+		resultType="String" parameterType="String">
+		SELECT case when count(*)=count(case
+		when a.status=0 then 1 else null end)
+		then b.order_code
+		else null
+		end
+		order_code
+		FROM so_sub_order a,so_sub_order b
+		WHERE
+		a.order_code=b.order_code
+		and b.status=0 and b.code=#{value}
+	</select>
+	<select id="querySubOrderByWaitPutSeaWashes" resultMap="SubOrderDOResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE put_status = 0
+		and approve_status = 1 
+		and type in (3,4,5)
+		and pay_time
+		&lt;= DATE_SUB(now(),INTERVAL #{minute} minute)
+		and pay_time &gt;=
+		DATE_SUB(now(),INTERVAL 3 day)
+		and status =4
+		and supplier_id not in
+		<foreach item="supplierId" collection="supplierIds"
+			separator="," open="(" close=")">
+			#{supplierId}
+		</foreach>
+		limit 1000
+	</select>
+
+	<update id="MybatisSubOrderDAO_batch_updateSubOrderStatusByCode" parameterType="map">
+		update so_sub_order
+		<set>
+			<if test="approveStatus != null  "> approve_status = #{approveStatus},</if>
+			<if test="subOrderStatus != null  "> status = #{subOrderStatus},</if>
+			<if test="deliveredTime!=null and deliveredTime!=''">delivered_time = #{deliveredTime},</if>
+			modify_time = now()
+		</set>
+		where
+		code in
+		<foreach item="subOrderDO" collection="subOrderDOList"
+			separator="," open="(" close=")">
+			#{subOrderDO.code}
+		</foreach>
+	</update>
+	
+	<update id="MybatisSubOrderDAO_batch_updateApproveStatusByOrderCode" parameterType="map">
+		update so_sub_order
+		<set>
+			<if test="approveStatus != null  "> approve_status = #{approveStatus},</if>
+			modify_time = now()
+		</set>
+		where
+		order_code in
+		<foreach item="subOrderDO" collection="subOrderDOList"
+			separator="," open="(" close=")">
+			#{subOrderDO.orderCode}
+		</foreach>
+	</update>
+
+	<!-- 父单支付成功，更新子单状态 -->
+	<update id="updateSubOrderStatusAfterSuccessPay" parameterType="com.meitun.salesorder.domain.SalesOrderDO">
+		update so_sub_order
+		set
+		status=#{status},
+		modify_time=#{modifyTime},
+		pay_time=#{payTime},
+		pay_code=#{payCode},
+		pay_type = #{payType},
+		pay_way
+		= #{payWay}
+		where
+		order_code = #{code}
+	</update>
+
+	<select id="querySubOrderBySeaOrderUnPayIsExpired" resultMap="SubOrderDOResultMap"
+		parameterType="int">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM so_sub_order
+		WHERE status = 2
+		AND type in (3,4,5)
+		AND create_time
+		&lt;= date_sub(now(), interval #{value}+1 minute)
+		AND create_time &gt;
+		date_sub(now(), interval 2 day)
+		ORDER BY create_time
+		ASC
+		Limit 0,1000
+	</select>
+
+	<select id="querySubOrderToBirdexAfterPayThirtyMinutes"
+		resultMap="SubOrderDOResultMap" parameterType="map">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM so_sub_order
+		WHERE status = 4
+		ADN approve_status = 1 
+		AND warehouse_id = #{warehouseId}
+		AND type = #{type}
+		AND pay_time &lt;= date_sub(now(), interval #{expired}+1 minute)
+		AND pay_time &gt;=date_sub(now(),interval 10 day)
+		ORDER BY pay_time
+		Limit 0,500
+	</select>
+
+	<select id="querySubOrderToFisherAfterPayThirtyMinutes" resultMap="SubOrderDOResultMap" parameterType="map">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM so_sub_order a FORCE INDEX (idx_createtime) 
+		WHERE
+		a.status = 4
+		and a.create_time &gt;= date_sub(now(), interval 3 day)
+		AND a.approve_status = 1 
+		<if test="channelId != null  ">
+			AND a.sea_channel in
+			<foreach item="sts" collection="channelId" separator=","
+				open="(" close=")">
+				#{sts}
+			</foreach>
+		</if>
+		<if test="warehouseId != null  ">
+			AND a.warehouse_id in
+			<foreach item="sts" collection="warehouseId" separator=","
+				open="(" close=")">
+				#{sts}
+			</foreach>
+		</if>
+		AND a.type = #{type}
+		AND a.pay_time &lt;= date_sub(now(), interval #{expired}+1 minute)
+		and not exists (
+           select 1 
+           from so_order_push_log b
+           where a.code = b.sub_order_code
+                 and b.push_status=1
+                 and b.type=1
+	    )
+		ORDER BY a.pay_time
+		Limit 0,500
+	</select>
+	
+	<select id="querySubOrderToKjtAfterPayThirtyMinutes"  resultMap="SubOrderDOResultMap" parameterType="map">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM so_sub_order
+		WHERE status = 4  
+		  AND sea_channel = #{channelId}
+		  AND type = #{type}
+		  AND pay_time &lt;= date_sub(now(), interval #{expired}+1 minute)
+		  AND pay_time &gt;=date_sub(now(),interval 10 day)
+		ORDER BY pay_time    
+		Limit 0,500
+	</select>
+
+	<!-- 根据会员id查询“待支付”的订单数， 普通订单根据父订单id分组 -->
+	<select id="selectPaymentCount" resultType="int" parameterType="long">
+		SELECT
+		SUM(t.cnt)
+		FROM
+		(
+		(SELECT
+		COUNT(DISTINCT order_id) AS cnt
+		FROM
+		so_sub_order
+		WHERE member_id = #{memberId}
+		AND STATUS = 2
+		AND TYPE IN (1,
+		2)
+		AND deleted = 2)
+		UNION ALL
+		(SELECT COUNT(1) AS cnt
+		FROM so_sub_order
+		WHERE member_id = #{memberId}
+		AND STATUS = 2
+		AND TYPE > 2
+		AND deleted =
+		2)
+		) t
+	</select>
+
+	<!-- 查询“待完成”订单 -->
+	<select id="selectList4Finish" resultMap="SubOrderDOResultMap"
+		parameterType="com.meitun.salesorder.dto.remote.Suborder4FinishQO">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM so_sub_order
+		WHERE status = 5
+		AND (
+		(delivered_time &lt;=
+		#{deliveryEndTime} AND type != 5)
+		OR (delivered_time &lt;=
+		#{seaDeliveryEndTime} AND type = 5)
+		) AND create_time &gt;= #{createTime} 
+		Limit 
+		#{limit}
+	</select>
+
+	<select id="queryOrderCodeByPayedOrCancel" resultType="string"
+		parameterType="com.meitun.salesorder.domain.SalesOrderDO">
+		SELECT o.code FROM so_sub_order o
+		WHERE (status=2 or
+		(status=0 and (o.total+o.freight)=0) and o.pay_code is null)
+		and code
+		like concat(#{code},'%')
+		UNION ALL
+		SELECT o.code FROM so_sub_order o
+		WHERE status=0
+		and (o.total+o.freight)>0
+		and code like
+		concat(#{code},'%')
+		and not exists
+		(select 1 from so_refund_info i where
+		i.order_no = o.code)
+		Limit
+		#{start},#{pageSize}
+
+	</select>
+	<select id="queryOrderByCancelOrderAfterRefund" resultMap="SubOrderDOResultMap"
+		parameterType="com.meitun.salesorder.domain.SalesOrderDO">
+		SELECT o.*
+		FROM so_sub_order o,so_sales_order s
+		WHERE
+		o.order_code=s.code
+		and o.status=0
+		and o.code like concat(#{code},'%')
+		and (o.total+o.freight)&gt;0
+		and
+		o.pay_code is not null and o.pay_time
+		is not null
+		and not exists
+		(select 1 from so_refund_info i where
+		i.order_no = o.code or
+		i.order_no=s.code)
+		Limit #{start},#{pageSize}
+	</select>
+
+	<select id="selectSupplierDeliveryCountInfo" resultType="map"
+		parameterType="map">
+		select a.status,count(1) num
+		from so_sub_order a
+		<where>
+			<if test="statusList != null">
+				AND a.status IN
+				<foreach item="sts" collection="statusList" separator=","
+					open="(" close=")">
+					#{sts}
+				</foreach>
+			</if>
+			<if test="supplierId != null ">AND a.supplier_id=#{supplierId}</if>
+			<if test="startTime != null">
+				and 
+			     <![CDATA[ a.create_time >= #{startTime}  ]]>
+			</if>
+			<if test="endTime != null ">
+				and 
+			    <![CDATA[ a.create_time <= #{endTime}  ]]>
+			</if>
+			<if test="orderPrice != null">
+				and (
+				a.total > 0 or a.status !=4 or a.approve_status = 1 
+				or (a.total=0 and exists(
+				   select 1
+				   from so_sub_order b
+				   where b.member_id = a.member_id
+				         and b.pay_code is not null
+				         and DATE_FORMAT(b.create_time,'%Y-%m-%d') = DATE_FORMAT(a.create_time,'%Y-%m-%d')
+				         and b.total>0
+				    )
+				)
+				)
+			</if>
+			and approve_status=1
+		</where>
+		group by a.status
+	</select>
+
+	<select id="querySettleMinAndMaxId" resultType="map">
+		select max(id) as
+		max_id,min(id) as min_id
+		from so_sub_order
+		where status in (5,6) and
+		create_time>=date_sub(CURDATE() , INTERVAL 1
+		MONTH)
+	</select>
+
+	<select id="queryOrderItemSettleByMinId" resultMap="SubOrderDOResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE status in (5,6)
+		and id>=#{beginId} and
+		id&gt;#{endId}
+		AND create_time >= date_sub(CURDATE() , INTERVAL 1
+		MONTH)
+	</select>
+	
+	
+	
+	<!-- 根据OrderParentCouponQO分页查询 -->
+	<select id="selectParentCounponPageByQO" resultType="com.meitun.salesorder.dto.remote.OrderParentCouponQO"
+		parameterType="com.meitun.salesorder.dto.remote.OrderParentCouponQO">
+		select so.supplier_name as suppliername,c.product_name as spuname,so.account_name as accountname,c.start_time as startTime,so.create_time as createTime,c.code as parentCouponCode,c.status as status,c.end_time as endTime,c.sku_code as skuCode,c.update_time as updateTime,c.appointment_status as appointmentStatus,c.appointment_time as appointmentTime,c.content as content 
+		from  so_parent_coupon c
+		JOIN so_order_parent_coupon o  ON o.parent_coupon_id=c.id
+		JOIN so_sub_order so ON so.order_id=o.order_id
+		<!--LEFT JOIN so_sales_order s ON o.order_id=s.id
+		LEFT JOIN so_sub_order so ON s.id=so.order_id  -->
+		<include refid="OrderParentCouponQO_Where" />
+		ORDER BY so.create_time DESC
+		Limit #{start},#{pageSize}
+	</select>
+	
+	<!-- 根据subOrderQO查询总记录数 -->
+	<select id="selectParentCounponCountByQO" resultType="long"
+		parameterType="com.meitun.salesorder.dto.remote.OrderParentCouponQO">
+		SELECT
+		count(1)
+		from  so_parent_coupon c
+		JOIN so_order_parent_coupon o  ON o.parent_coupon_id=c.id
+		JOIN so_sub_order so ON so.order_id=o.order_id
+		<!--  LEFT JOIN so_sales_order s ON o.order_id=s.id
+		LEFT JOIN so_sub_order so ON s.id=so.order_id
+		-->
+		<include refid="OrderParentCouponQO_Where" />
+	</select>
+	
+	
+	<!-- 根据OrderParentCouponQO分页查询 -->
+	<select id="selectParentCounponStatusPageByQO" resultType="com.meitun.salesorder.dto.remote.OrderParentCouponQO"
+		parameterType="com.meitun.salesorder.dto.remote.OrderParentCouponQO">
+		select so.supplier_name as suppliername,c.product_name as spuname,so.account_name as accountname,c.start_time as startTime,so.create_time as createTime,c.code as parentCouponCode,c.status as status,c.end_time as endTime,c.sku_code as skuCode ,c.update_time as updateTime,c.appointment_status as appointmentStatus,c.appointment_time as appointmentTime,c.content as content 
+		from  so_parent_coupon c
+		JOIN so_order_parent_coupon o  ON o.parent_coupon_id=c.id
+		LEFT JOIN so_sales_order s ON o.order_id=s.id
+		LEFT JOIN so_sub_order so ON s.id=so.order_id
+		where c.status=3
+		<if test="supplierId != null   "> AND so.supplier_id=#{supplierId} </if>
+		<if test="createTime != null   "> AND c.update_time&gt;=#{createTime} </if>
+		<if test="updateTime != null   "> AND c.update_time&lt;=#{updateTime} </if>
+		ORDER BY so.order_id DESC
+		Limit #{start},#{pageSize}
+	</select>
+	
+	<!-- 根据subOrderQO查询总记录数 -->
+	<select id="selectParentCounponCountStatusByQO" resultType="long"
+		parameterType="com.meitun.salesorder.dto.remote.OrderParentCouponQO">
+		SELECT
+		count(1)
+		from  so_parent_coupon c
+		JOIN so_order_parent_coupon o  ON o.parent_coupon_id=c.id
+		JOIN so_sub_order so ON so.order_id=o.order_id
+		
+		<!--  LEFT JOIN so_sales_order s ON so.order_id=s.id-->
+		where c.status=3
+		<if test="supplierId != null   "> AND so.supplier_id=#{supplierId} </if>
+	</select>
+	
+	<!-- OrderParentCouponQO where条件 -->
+	<sql id="OrderParentCouponQO_Where"><!-- xml转义字符需要 <![CDATA[ ]]> 标签 -->
+		<where>
+    		<if test="accountname != null and accountname != '' "> AND so.account_name=#{accountname} </if>
+			<if test="parentCouponCode != null "> AND c.code=#{parentCouponCode} </if>
+			<if test="skuCode != null "> AND c.sku_code=#{skuCode} </if>
+			<if test="startTime != null  and startTime != '' "> AND c.create_time&gt;=#{startTime} </if>
+			<if test="endTime != null  and endTime != '' "> AND c.create_time&lt;=#{endTime} </if>
+			<if test="supplierId != null   "> AND so.supplier_id=#{supplierId} </if>
+			<if test="suppliername != null and suppliername != '' "> AND so.supplier_name=#{suppliername} </if>
+			<if test="spuname != null and spuname != '' "> AND c.product_name=#{spuname} </if>
+			<if test="status != null  "> AND c.status=#{status} </if>
+			
+		</where>
+	</sql>
+	
+	
+	<!-- 根据code查询 -->
+	<select id="selectCodeOrOrderCode" parameterType="String" resultMap="SubOrderDOResultMap">
+		SELECT
+		<include refid="MybatisSubOrderDAO_all_column_fields" />
+		FROM
+		so_sub_order
+		WHERE
+		code = #{code} or order_code = #{orderCode}
+		limit 0,1
+	</select>
+</mapper>
